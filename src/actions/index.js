@@ -4,7 +4,7 @@ export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const ADD_SMURF = "ADD_SMURF";
-export const ERROR_MESSAGE = "ERROR_MESSAGE";
+export const SET_ERROR = "SET_ERROR";
 
 export const fetchSmurfs = () => {
   return (dispatch) => {
@@ -17,7 +17,7 @@ export const fetchSmurfs = () => {
         dispatch(fetchSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(errorMessage(err)); // or fetchFail with error message inside?
+        dispatch(fetchFail(err));
       });
   };
 };
@@ -30,16 +30,16 @@ export const fetchSuccess = (smurfs) => {
   return { type: FETCH_SUCCESS, payload: smurfs };
 };
 
-export const fetchFail = () => {
-  return { type: FETCH_FAIL };
+export const fetchFail = (err) => {
+  return { type: FETCH_FAIL, payload: err };
 };
 
 export const addSmurf = (newSmurf) => {
   return { type: ADD_SMURF, payload: newSmurf };
 };
 
-export const errorMessage = () => {
-  return { type: ERROR_MESSAGE }; //add payload
+export const setError = (message) => {
+  return { type: SET_ERROR, payload: message };
 };
 
 //Task List:

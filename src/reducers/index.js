@@ -1,9 +1,9 @@
-import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL, ADD_SMURF, ERROR_MESSAGE } from "../actions";
+import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL, ADD_SMURF, SET_ERROR } from "../actions";
 
 export const initialState = {
   smurfs: [],
   loading: false,
-  error: ""
+  errorMessage: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: ""
+        errorMessage: ""
       };
 
     case FETCH_SUCCESS:
@@ -20,24 +20,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         smurfs: action.payload,
         loading: false,
-        error: ""
+        errorMessage: ""
       };
 
-    // case FETCH_FAIL:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     error: action.payload //this one maybe calls 'ERROR MESSAGE'?
-    //   };
+    case FETCH_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.payload
+      };
 
-    // case ADD_SMURF:
-    //   return { ...state, smurfs: [...state.smurfs, action.payload] };
+    case ADD_SMURF:
+      return { ...state, smurfs: [...state.smurfs, action.payload] };
 
-    // case ERROR_MESSAGE:
-    //   return {
-    //     ...state,
-    //     error: action.payload
-    //   };
+    case SET_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
 
     default:
       return state;
