@@ -8,20 +8,20 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case FETCH_START:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //     error: ""
-    //   };
+    case FETCH_START:
+      return {
+        ...state,
+        loading: true,
+        error: ""
+      };
 
-    // case FETCH_SUCCESS:
-    //   return {
-    //     ...state,
-    //     // this might include a action.payload
-    //     loading: false,
-    //     error: ""
-    //   };
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        loading: false,
+        error: ""
+      };
 
     // case FETCH_FAIL:
     //   return {

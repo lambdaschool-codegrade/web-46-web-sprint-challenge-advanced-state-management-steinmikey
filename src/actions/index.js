@@ -13,7 +13,8 @@ export const fetchSmurfs = () => {
     axios
       .get("http://localhost:3333/smurfs")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        dispatch(fetchSuccess(res.data));
       })
       .catch((err) => {
         dispatch(errorMessage(err)); // or fetchFail with error message inside?
@@ -25,8 +26,8 @@ export const fetchStart = () => {
   return { type: FETCH_START };
 };
 
-export const fetchSuccess = () => {
-  return { type: FETCH_SUCCESS };
+export const fetchSuccess = (smurfs) => {
+  return { type: FETCH_SUCCESS, payload: smurfs };
 };
 
 export const fetchFail = () => {
